@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>详情</title>
+    <style>
+        /* 基本样式 */
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+        }
+
+        h1 {
+            color: #323232;
+            margin-top: 10px;
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .main-image img {
+            max-width: 100%;
+            height: auto;
+            /* 保持比例 */
+        }
+
+        .ad-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 900px;
+            padding: 1px 1px 1px 1px;
+            margin-top: 20px;
+            background-color: #f97dd8;
+            /* 设置广告背景色 */
+        }
+
+        .ad-item {
+            width: 32%;
+            position: relative;
+        }
+
+        .ad-slideshow img {
+            width: 100%;
+            height: auto;
+            display: none;
+        }
+
+        .ad-slideshow img.active {
+            display: block;
+        }
+
+        .image-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            width: 100%;
+            padding: 10px;
+            max-width: 900px;
+            /* 限制最大宽度 */
+        }
+
+        .image-item img {
+            width: 100%;
+            height: auto;
+            /* 保持比例 */
+        }
+
+        .password-container {
+            margin: 20px;
+        }
+
+        .password-section {
+            display: flex;
+            align-items: center;
+            /* 设置为水平排列 */
+            gap: 20px;
+        }
+
+        #passwordMessage {
+            color: red;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 8px 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .contact-btn {
+            background-color: #f44336;
+            text-decoration: none;
+            color: white;
+            display: inline-block;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+
+        .contact-btn:hover {
+            background-color: #d32f2f;
+        }
+
+        .ad-description {
+            text-align: center;
+            font-size: 18px;
+            color: #323232;
+            margin-top: 12px;
+            /* 设置广告描述字体大小 */
+            padding: 10px;
+            background-color: #ffffff;
+            max-width: 900px;
+            width: 100%;
+            /* 限制最大宽度 */
+            border-radius: 4px;
+            /* 圆角 */
+            box-shadow: 0px 0px 10px #888888;
+            /* 阴影 */
+            font-family: 仿宋, sans-serif;
+            /* 字体 */
+            font-weight: bold;
+            /* 加粗 */
+            text-indent: 2em;
+            /* 首行缩进 */
+            text-align: justify;
+            /* 两端对齐 */
+        }
+
+        .yanse {
+            color: rgb(219, 12, 122)
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>详情</h1>
+        <div class="main-image">
+            <img id="mainImage" src="" alt="主图">
+        </div>
+
+        <!-- 广告容器，水平排列的广告轮播 -->
+        <div class="ad-container">
+            <!-- 第一个广告区域 -->
+            <div class="ad-item">
+                <div class="ad-slideshow" id="adSlideshow1">
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/性感模特夏西貌美大长腿很迷人/2.jpg" class="active" alt="广告1-1">
+                    </a>
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/宅男女神晓鱼酱情趣内衣美艳四射/3.jpg" alt="广告1-2">
+                    </a>
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/私房鼻祖王雨纯秀巨乳好身材看得见/4.jpg" alt="广告1-3">
+                    </a>
+                </div>
+            </div>
+            <!-- 第二个广告区域 -->
+            <div class="ad-item">
+                <div class="ad-slideshow" id="adSlideshow2">
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/天然呆萌小妹麻花酱身材好很诱人/7.jpg" class="active" alt="广告2-1">
+                    </a>
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/越南学生妹Azami火爆身材非常惊艳/1.jpg" alt="广告2-2">
+                    </a>
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/抹油少女七月喵子情趣束缚大尺度/4.jpg" alt="广告2-3">
+                    </a>
+                </div>
+            </div>
+            <!-- 第三个广告区域 -->
+            <div class="ad-item">
+                <div class="ad-slideshow" id="adSlideshow3">
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/人形奶牛周大萌白皙胴体美乳侧漏/34.jpg" class="active" alt="广告3-1">
+                    </a>
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/性感美女豆瓣酱火辣身材任君摆布/47.jpg" alt="广告3-2">
+                    </a>
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/迷情圣诞米线线情趣死库水大秀蜜臀/27.jpg" alt="广告3-3">
+                    </a>
+                </div>
+            </div>
+            <div class="ad-item">
+                <div class="ad-slideshow" id="adSlideshow4">
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/巨乳嫩模糯美子丰腴胴体白皙可口/28.jpg" class="active" alt="广告3-1">
+                    </a>
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/韩国性感萌妹子孙乐乐湿身艺术写真/43.jpg" alt="广告3-2">
+                    </a>
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/韩国女神Zenny紧身死库水室外裸身/36.jpg" alt="广告3-3">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 添加独立的文本描述 -->
+        <div class="ad-description">
+            <p>国人大佬重置版，加了很多自己写的线路。增加回想全开，增加多条线路。当然有可能会报错，我们移植了安卓经过测试感觉有问题。后面在更新看看在考虑移植安卓吧，喜欢尝新的兄弟们可以先去踩踩坑——这是一款NTR大作，画风是无敌级别！任务系统非常丰富，特别是支线任务非常繁多，都很有特点人物对话方面也绝对是各种梗，各种笑话百出为爱痴狂的女祭司和身为一名普通冒险者的男主之间的各种冒险经历本作主打的题材就是无敌NTR，但是非常贴心的设置了NTR开关？也可以纯爱玩通关~可以让游戏当中完全不出现NTR场景就算你打开NTR开关也可以通过各种选择来避免NTR本作已经更新了多更新了70多个版本，这是目前的最新版！
+            </p>
+            <p>游戏剧情：在一个充满西方玄幻元素的世界里，你作为一名初出茅庐的冒险者，怀揣着成为最强流星级冒险者的伟大梦想来到了冒险者公会。之前大多都是从事一些帮人找东西，打扫下水道垃圾之类的低贱工作。但是今天你决定到公会里面找人组队来接一些更加复杂的任务！–在公会里面被各色人等鄙视和看不起的你只得失望的离开了公会。这时在之前偶然买到的一个奇怪的戒指起了作用！你在公会外面果然遇到了一个非常可爱的祭司妹子~因为英雄救美行为不仅结识了可爱的女祭司，还成功的跟妹子组队了！然而妹子虽然表面上是像圣母般温柔的女祭司，真面目却是一个无可救药的每天要自我安慰20次的超“吃”女！从此你就带着女祭司妹子开始你们相爱，NTR，被NTR的传奇旅途！—
+            </p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+
+        </div>
+
+        <div class="image-container" id="image-container"></div>
+
+        <div class="ad-description">
+            <P>更新内容：重置作者留言：重制版0.8（原名测试版本17）经历了一坤月的时间，体量达到了3.65G并且囊括了回想房系统，与原版所有事件完成度比之前的0.25测试版本强了数倍（事件一般都有修改过，短的事件合并成长的事件，增加了内置攻略图组系统，包括自动对话对话A键跳过对话S键，增加了新的原创事件）也是免费版本的最后一次更新了小bug肯定会有，因为这些都是在极短的时间内完成的，但不影响游戏体验。新增PM的MMD视频，经过几天的捏脸已经完成了PM恋活2人物卡，与原版画风比较接近”
+            </P>
+            <P></P>
+            <P></P>
+            <P></P>
+            <P></P>
+        </div>
+        <div><a href="https://share.weiyun.com/7dxg6Kev" class="yanse">点击下载游戏</a>
+            <a href="https://qm.qq.com/q/IekbXKmPAG">提取码联系客服获取</a>
+        </div>
+        <p class="yanse">如果客服链接失效，请看主页公告获取最新客服链接！</p>
+
+        <div class="password-container" id="password-container">
+            <div class="password-section">
+                <input type="password" id="passwordInput" placeholder="输入密码" />
+                <button onclick="checkPassword()">确认</button>
+                <a href="https://qm.qq.com/q/IekbXKmPAG" id="contactButton" class="contact-btn"
+                    target="_blank">访问密码请联系客服</a>
+            </div>
+            <div id="passwordMessage"></div>
+        </div>
+    </div>
+
+    <script>
+        const imageFolderPath = '../image2/NTR女祭司 Ver0.8 重制【PC3.17G】/';
+        const totalImages = 8;
+        const password = "ab2658"; // 设置你想要的密码
+        let imageCountLoading = 0;
+
+        window.onload = function () {
+            renderImages();
+            startSlideshow('adSlideshow1'); // 启动第一个广告轮播
+            startSlideshow('adSlideshow2'); // 启动第二个广告轮播
+            startSlideshow('adSlideshow3'); // 启动第三个广告轮播
+            startSlideshow('adSlideshow4'); // 启动第三个广告轮播
+        };
+
+        function renderImages() {
+            const mainImage = document.getElementById('mainImage');
+            const imageContainer = document.getElementById('image-container');
+
+            mainImage.src = `${imageFolderPath}1.jpg`;
+            imageContainer.innerHTML = '';
+            // 清空之前的图片
+
+            // 加载前8张描述图
+            for (let i = 0; i < 7; i++) { // 从0到7，共8张
+                const imgElement = document.createElement('div');
+                imgElement.className = 'image-item';
+                imgElement.innerHTML = `<img src="${imageFolderPath}${i + 2}.jpg" alt="商品描述图 ${i + 2}" onload="checkImageCount()">`;
+                imageContainer.appendChild(imgElement);
+            }
+        }
+
+        function checkImageCount() {
+            imageCountLoading++;
+            if (imageCountLoading === 8) {
+                document.getElementById('passwordMessage').innerText = '请输入密码以查看更多图片';
+            }
+        }
+
+        function renderRemainingImages() {
+            const imageContainer = document.getElementById('image-container');
+            for (let i = 8; i < totalImages; i++) { // 从第9张开始加载
+                const imgElement = document.createElement('div');
+                imgElement.className = 'image-item';
+                imgElement.innerHTML = `<img src="${imageFolderPath}${i + 1}.jpg" alt="商品描述图 ${i + 1}">`;
+                imageContainer.appendChild(imgElement);
+            }
+        }
+
+        function checkPassword() {
+            const input = document.getElementById('passwordInput').value;
+            if (input === password) {
+                // 如果密码正确，继续显示后续图片，且隐藏输入框和客服按钮
+                renderRemainingImages();
+                document.getElementById('password-container').style.display = 'none'; // 隐藏密码输入框
+                document.getElementById('passwordMessage').innerText = ''; // 清除提示信息
+                document.getElementById('contactButton').style.display = 'none'; // 隐藏联系客服按钮
+            } else {
+                document.getElementById('passwordMessage').innerText = '密码错误，请重试！';
+            }
+        }
+
+        function startSlideshow(slideshowId) {
+            const slideshow = document.getElementById(slideshowId);
+            const images = slideshow.getElementsByTagName('img');
+            let index = 0;
+
+            function showNextImage() {
+                images[index].classList.remove('active');
+                index = (index + 1) % images.length;
+                images[index].classList.add('active');
+            }
+
+            setInterval(showNextImage, 3000); // 每3秒切换一次图片
+        }
+    </script>
+</body>
+
+</html>

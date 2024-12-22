@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>详情</title>
+    <style>
+        /* 基本样式 */
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+        }
+
+        h1 {
+            color: #323232;
+            margin-top: 10px;
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .main-image img {
+            max-width: 100%;
+            height: auto;
+            /* 保持比例 */
+        }
+
+        .ad-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 900px;
+            padding: 1px 1px 1px 1px;
+            margin-top: 20px;
+            background-color: #f97dd8;
+            /* 设置广告背景色 */
+        }
+
+        .ad-item {
+            width: 32%;
+            position: relative;
+        }
+
+        .ad-slideshow img {
+            width: 100%;
+            height: auto;
+            display: none;
+        }
+
+        .ad-slideshow img.active {
+            display: block;
+        }
+
+        .image-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            width: 100%;
+            padding: 10px;
+            max-width: 900px;
+            /* 限制最大宽度 */
+        }
+
+        .image-item img {
+            width: 100%;
+            height: auto;
+            /* 保持比例 */
+        }
+
+        .password-container {
+            margin: 20px;
+        }
+
+        .password-section {
+            display: flex;
+            align-items: center;
+            /* 设置为水平排列 */
+            gap: 20px;
+        }
+
+        #passwordMessage {
+            color: red;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 8px 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .contact-btn {
+            background-color: #f44336;
+            text-decoration: none;
+            color: white;
+            display: inline-block;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+
+        .contact-btn:hover {
+            background-color: #d32f2f;
+        }
+
+        .ad-description {
+            text-align: center;
+            font-size: 18px;
+            color: #323232;
+            margin-top: 12px;
+            /* 设置广告描述字体大小 */
+            padding: 10px;
+            background-color: #ffffff;
+            max-width: 900px;
+            width: 100%;
+            /* 限制最大宽度 */
+            border-radius: 4px;
+            /* 圆角 */
+            box-shadow: 0px 0px 10px #888888;
+            /* 阴影 */
+            font-family: 仿宋, sans-serif;
+            /* 字体 */
+            font-weight: bold;
+            /* 加粗 */
+            text-indent: 2em;
+            /* 首行缩进 */
+            text-align: justify;
+            /* 两端对齐 */
+        }
+
+        .yanse {
+            color: rgb(219, 12, 122)
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>详情</h1>
+        <div class="main-image">
+            <img id="mainImage" src="" alt="主图">
+        </div>
+
+        <!-- 广告容器，水平排列的广告轮播 -->
+        <div class="ad-container">
+            <!-- 第一个广告区域 -->
+            <div class="ad-item">
+                <div class="ad-slideshow" id="adSlideshow1">
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/性感模特夏西貌美大长腿很迷人/2.jpg" class="active" alt="广告1-1">
+                    </a>
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/宅男女神晓鱼酱情趣内衣美艳四射/3.jpg" alt="广告1-2">
+                    </a>
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/私房鼻祖王雨纯秀巨乳好身材看得见/4.jpg" alt="广告1-3">
+                    </a>
+                </div>
+            </div>
+            <!-- 第二个广告区域 -->
+            <div class="ad-item">
+                <div class="ad-slideshow" id="adSlideshow2">
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/天然呆萌小妹麻花酱身材好很诱人/7.jpg" class="active" alt="广告2-1">
+                    </a>
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/越南学生妹Azami火爆身材非常惊艳/1.jpg" alt="广告2-2">
+                    </a>
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/抹油少女七月喵子情趣束缚大尺度/4.jpg" alt="广告2-3">
+                    </a>
+                </div>
+            </div>
+            <!-- 第三个广告区域 -->
+            <div class="ad-item">
+                <div class="ad-slideshow" id="adSlideshow3">
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/人形奶牛周大萌白皙胴体美乳侧漏/34.jpg" class="active" alt="广告3-1">
+                    </a>
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/性感美女豆瓣酱火辣身材任君摆布/47.jpg" alt="广告3-2">
+                    </a>
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/迷情圣诞米线线情趣死库水大秀蜜臀/27.jpg" alt="广告3-3">
+                    </a>
+                </div>
+            </div>
+            <div class="ad-item">
+                <div class="ad-slideshow" id="adSlideshow4">
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/巨乳嫩模糯美子丰腴胴体白皙可口/28.jpg" class="active" alt="广告3-1">
+                    </a>
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/韩国性感萌妹子孙乐乐湿身艺术写真/43.jpg" alt="广告3-2">
+                    </a>
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/韩国女神Zenny紧身死库水室外裸身/36.jpg" alt="广告3-3">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 添加独立的文本描述 -->
+        <div class="ad-description">
+            <p>幻想温馨养成 RPG
+                ■故事
+                在宁静的街道上经营咖啡馆的年轻夫妇，今天也悠然自得、愉快地生活着。
+                然而某日，身为丈夫的奥伦遭到了神秘魔物的袭击。
+                幸好怪我本身并无大碍，问题却出在别处。
+
+                那魔物——由独角兽传播的病原菌，即 UC 菌。
+                不幸的是，奥伦的脑部被那种细菌侵袭，患上了名为“UC 病”的奇病。
+
+                那可怕的病症症状表现为——对所爱之人与他人发生性关系时，表现出异常的兴奋。
+
+                除了这一点外，奥伦变成了一种完全无害的愚蠢疾病，为了消除邻里女士们的不良传闻，
+                他决定委托熟识的冒险者帮忙获取治疗所需的“独角兽之角”。
+
+                于是，关于获取角的事宜，他委托给了那位冒险者及自己的妻子，而奥伦则因病态萌生的“癖好”，
+                向妻子——莉泽提出了种种请求，日复一日地享受着她给予的各种满足。
+
+                什么游戏？
+                本作是以幻想世界为舞台，讲述了一对普通夫妇安心安全、温馨日常的被绿 RPG。
+                女主角始终一心向着男主角，因着他的请求，她将自己的身心托付给了形形色色的男人。
+                在剧情中，绝不会有对配角心生倾慕或失去对主角爱意的情况发生。
+                基本上，这是一款以喜剧风格推进故事，讲述主人公为治愈疾病而奋斗的日常，并在关键时刻让女主角做出一些古怪行为的电子游戏。
+
+                ～情景例句～
+
+                ■单独向男性出租并正常发生性关系
+                ■单身男性，邀请熟人参与 3P
+                ■被年下的臭小鬼们在爱情旅馆里捉弄
+                ■夜晚的巷弄和公园里被迫赤身裸体行走
+                ■被变态中年调教
+                ■在意外事件酒吧向那里的男士们借出并形成轮○
+                等等，还有许多其他的东西。
+
+                普通情况下也有和谐相处的情景，但也有不少情况是非典型的，无论怎样偏袒地看待，都不能算是和谐相处。
+
+                ※所有情色场景均基于双方同意，且不含任何事件性或犯罪性内容。
+                ※女主角对游戏内容本身表示同意的情况并不多见。</p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+
+        </div>
+
+        <div class="image-container" id="image-container"></div>
+
+        <div class="ad-description">
+            <P>更新日志：v9</P>
+            <P></P>
+            <P></P>
+            <P></P>
+            <P></P>
+        </div>
+        <div><a href="https://share.weiyun.com/AVDF1NUJ" class="yanse">点击下载游戏</a>
+            <a href="https://qm.qq.com/q/IekbXKmPAG">提取码联系客服获取</a>
+        </div>
+        <p class="yanse">如果客服链接失效，请看主页公告获取最新客服链接！</p>
+
+        <div class="password-container" id="password-container">
+            <div class="password-section">
+                <input type="password" id="passwordInput" placeholder="输入密码" />
+                <button onclick="checkPassword()">确认</button>
+                <a href="https://qm.qq.com/q/IekbXKmPAG" id="contactButton" class="contact-btn"
+                    target="_blank">访问密码请联系客服</a>
+            </div>
+            <div id="passwordMessage"></div>
+        </div>
+    </div>
+
+    <script>
+        const imageFolderPath = '../image2/卡尔瓦先生家的欢乐抗病生活 UC/';
+        const totalImages = 8;
+        const password = "ab2658"; // 设置你想要的密码
+        let imageCountLoading = 0;
+
+        window.onload = function () {
+            renderImages();
+            startSlideshow('adSlideshow1'); // 启动第一个广告轮播
+            startSlideshow('adSlideshow2'); // 启动第二个广告轮播
+            startSlideshow('adSlideshow3'); // 启动第三个广告轮播
+            startSlideshow('adSlideshow4'); // 启动第三个广告轮播
+        };
+
+        function renderImages() {
+            const mainImage = document.getElementById('mainImage');
+            const imageContainer = document.getElementById('image-container');
+
+            mainImage.src = `${imageFolderPath}1.jpg`;
+            imageContainer.innerHTML = '';
+            // 清空之前的图片
+
+            // 加载前8张描述图
+            for (let i = 0; i < 7; i++) { // 从0到7，共8张
+                const imgElement = document.createElement('div');
+                imgElement.className = 'image-item';
+                imgElement.innerHTML = `<img src="${imageFolderPath}${i + 2}.jpg" alt="商品描述图 ${i + 2}" onload="checkImageCount()">`;
+                imageContainer.appendChild(imgElement);
+            }
+        }
+
+        function checkImageCount() {
+            imageCountLoading++;
+            if (imageCountLoading === 8) {
+                document.getElementById('passwordMessage').innerText = '请输入密码以查看更多图片';
+            }
+        }
+
+        function renderRemainingImages() {
+            const imageContainer = document.getElementById('image-container');
+            for (let i = 8; i < totalImages; i++) { // 从第9张开始加载
+                const imgElement = document.createElement('div');
+                imgElement.className = 'image-item';
+                imgElement.innerHTML = `<img src="${imageFolderPath}${i + 1}.jpg" alt="商品描述图 ${i + 1}">`;
+                imageContainer.appendChild(imgElement);
+            }
+        }
+
+        function checkPassword() {
+            const input = document.getElementById('passwordInput').value;
+            if (input === password) {
+                // 如果密码正确，继续显示后续图片，且隐藏输入框和客服按钮
+                renderRemainingImages();
+                document.getElementById('password-container').style.display = 'none'; // 隐藏密码输入框
+                document.getElementById('passwordMessage').innerText = ''; // 清除提示信息
+                document.getElementById('contactButton').style.display = 'none'; // 隐藏联系客服按钮
+            } else {
+                document.getElementById('passwordMessage').innerText = '密码错误，请重试！';
+            }
+        }
+
+        function startSlideshow(slideshowId) {
+            const slideshow = document.getElementById(slideshowId);
+            const images = slideshow.getElementsByTagName('img');
+            let index = 0;
+
+            function showNextImage() {
+                images[index].classList.remove('active');
+                index = (index + 1) % images.length;
+                images[index].classList.add('active');
+            }
+
+            setInterval(showNextImage, 3000); // 每3秒切换一次图片
+        }
+    </script>
+</body>
+
+</html>

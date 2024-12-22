@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>详情</title>
+    <style>
+        /* 基本样式 */
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+        }
+
+        h1 {
+            color: #323232;
+            margin-top: 10px;
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .main-image img {
+            max-width: 100%;
+            height: auto;
+            /* 保持比例 */
+        }
+
+        .ad-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 900px;
+            padding: 1px 1px 1px 1px;
+            margin-top: 20px;
+            background-color: #f97dd8;
+            /* 设置广告背景色 */
+        }
+
+        .ad-item {
+            width: 32%;
+            position: relative;
+        }
+
+        .ad-slideshow img {
+            width: 100%;
+            height: auto;
+            display: none;
+        }
+
+        .ad-slideshow img.active {
+            display: block;
+        }
+
+        .image-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            width: 100%;
+            padding: 10px;
+            max-width: 900px;
+            /* 限制最大宽度 */
+        }
+
+        .image-item img {
+            width: 100%;
+            height: auto;
+            /* 保持比例 */
+        }
+
+        .password-container {
+            margin: 20px;
+        }
+
+        .password-section {
+            display: flex;
+            align-items: center;
+            /* 设置为水平排列 */
+            gap: 20px;
+        }
+
+        #passwordMessage {
+            color: red;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 8px 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .contact-btn {
+            background-color: #f44336;
+            text-decoration: none;
+            color: white;
+            display: inline-block;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+
+        .contact-btn:hover {
+            background-color: #d32f2f;
+        }
+
+        .ad-description {
+            text-align: center;
+            font-size: 18px;
+            color: #323232;
+            margin-top: 12px;
+            /* 设置广告描述字体大小 */
+            padding: 10px;
+            background-color: #ffffff;
+            max-width: 900px;
+            width: 100%;
+            /* 限制最大宽度 */
+            border-radius: 4px;
+            /* 圆角 */
+            box-shadow: 0px 0px 10px #888888;
+            /* 阴影 */
+            font-family: 仿宋, sans-serif;
+            /* 字体 */
+            font-weight: bold;
+            /* 加粗 */
+            text-indent: 2em;
+            /* 首行缩进 */
+            text-align: justify;
+            /* 两端对齐 */
+        }
+
+        .yanse {
+            color: rgb(219, 12, 122)
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>详情</h1>
+        <div class="main-image">
+            <img id="mainImage" src="" alt="主图">
+        </div>
+
+        <!-- 广告容器，水平排列的广告轮播 -->
+        <div class="ad-container">
+            <!-- 第一个广告区域 -->
+            <div class="ad-item">
+                <div class="ad-slideshow" id="adSlideshow1">
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/性感模特夏西貌美大长腿很迷人/2.jpg" class="active" alt="广告1-1">
+                    </a>
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/宅男女神晓鱼酱情趣内衣美艳四射/3.jpg" alt="广告1-2">
+                    </a>
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/私房鼻祖王雨纯秀巨乳好身材看得见/4.jpg" alt="广告1-3">
+                    </a>
+                </div>
+            </div>
+            <!-- 第二个广告区域 -->
+            <div class="ad-item">
+                <div class="ad-slideshow" id="adSlideshow2">
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/天然呆萌小妹麻花酱身材好很诱人/7.jpg" class="active" alt="广告2-1">
+                    </a>
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/越南学生妹Azami火爆身材非常惊艳/1.jpg" alt="广告2-2">
+                    </a>
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/抹油少女七月喵子情趣束缚大尺度/4.jpg" alt="广告2-3">
+                    </a>
+                </div>
+            </div>
+            <!-- 第三个广告区域 -->
+            <div class="ad-item">
+                <div class="ad-slideshow" id="adSlideshow3">
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/人形奶牛周大萌白皙胴体美乳侧漏/34.jpg" class="active" alt="广告3-1">
+                    </a>
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/性感美女豆瓣酱火辣身材任君摆布/47.jpg" alt="广告3-2">
+                    </a>
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/迷情圣诞米线线情趣死库水大秀蜜臀/27.jpg" alt="广告3-3">
+                    </a>
+                </div>
+            </div>
+            <div class="ad-item">
+                <div class="ad-slideshow" id="adSlideshow4">
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/巨乳嫩模糯美子丰腴胴体白皙可口/28.jpg" class="active" alt="广告3-1">
+                    </a>
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/韩国性感萌妹子孙乐乐湿身艺术写真/43.jpg" alt="广告3-2">
+                    </a>
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/韩国女神Zenny紧身死库水室外裸身/36.jpg" alt="广告3-3">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 添加独立的文本描述 -->
+        <div class="ad-description">
+            <p>▼—故事简介—▼
+                　　异种交配 x 异变探索类型的逃脱游戏!
+                　　宇宙中存在众多银河，其中之一为“菲奥利亚银河”
+                　　为了维护这个银河的和平，女孩子加入了菲奥利亚银河宇宙防卫军
+                　　她的名字是拉皮尼斯=蓝宝石
+                　　然而入队的第一天，拉皮尼斯乘坐的宇宙船不幸被四处掠夺邻近星球的宇宙海盗“罗戈尔海盗团”袭击。</p>
+            <p>在罗戈尔海盗团的袭击下，宇宙船失去了控制，被吸入了虫洞…。
+                　　拉皮尼斯醒来时，发现自己在宇宙船的通信室里。
+                　　然而，周围的景象似乎与以前不同，似乎已经移动到了另一个时空。
+                　　要返回原来的宇宙船，必须在循环的联系通道中做出正确的选择。
+                　　在联系通道中
+                　　　・没有异变时进入蓝色门
+                　　　・有异变时进入红色门
+                　　如果选择正确的门，就能接近原来的时空，从这个虫洞中逃脱。
+                　　但如果选择了错误的门，等待她的是邪恶且欲望满满的罗戈尔海盗团…!</p>
+
+        </div>
+
+        <div class="image-container" id="image-container"></div>
+
+        <div class="ad-description">
+            <P>■游戏系统
+                ▼—基本系统—▼
+                　　这是一款简单的异变探索类型的逃脱游戏。
+                　　在循环的联系通道中移动，并与原始的联系通道进行比较，
+                　　寻找是否有异变存在。　
+                　　联系通道中设有蓝色门和红色门，
+                　　　・如果感觉有异变，则从红色门移动
+                　　　・如果感觉没有异变，则从蓝色门移动
+                　　通过不断重复这两项，前进时空的层次，达到第10层就能顺利逃脱。
+                　　此外，游戏还附带攻略表，
+                　　即使对逃脱游戏没有信心的人也能轻松进行。</P>
+            <P>▼—状态—▼
+                　　可以确认拉皮尼斯的身体状态。
+                　　每次异变探索失败，拉皮尼斯的身体都会逐渐发生变化。
+                　　另外，虽然拉皮尼斯是新人，但作为宇宙防卫军的一员，携带有强力的光束枪。
+                　　这把光束枪非常强大，能够击退罗戈尔海盗团。
+                　　但是弹匣中有弹药数，所以要小心弹药数量进行联系通道的前进。
+                　　(*没有战斗要素)</P>
+            <P>▼—画廊—▼
+                　　有一个房间可以观赏解锁的H事件。
+                　　也可以一开始就解锁所有的H事件，快速观赏情色场景。
+
+                ■场景
+                　　・束缚触手贯通责罚
+                　　・巨乳化&巨大乳首化快感实验
+                　　・淫纹注射后的强○怀孕中出射精
+                　　・双性化媚药注入&连续精液高潮
+                　　・无情的机械震动器无限机械活塞
+                　　・快感堕落生产高潮
+                　　・人格崩坏在时空夹缝中永远的触手奸
+                　　　…等等。
+
+                ■其他・规格等</P>
+            <P>■规格・其他
+                ・CG张数 : 24张
+                ・CG差分总张数 : 325张(不包括立绘和其他CG)
+                ・游戏时间 : 大约2小时
+                ・情色场景有喘息声配音
+                　音频素材_Pincree(CV:逢坂成美)
+
+                ・支持键盘操作
+                本作品使用RPG Maker MZ制作。
+                请务必在试玩版中进行运行确认。</P>
+            <P>■社团 : Har*pekoChicken
+                　■剧本 : かめたろう
+                　■脚本 : かめたろう
+                　■插画 : たま蔵
+                　■其他图形素材 : たま蔵
+                　(SNS同上)
+
+                ◆被寝取◆
+                为远在他乡的未婚夫而努力的莉拉，却引来了想要占有她的男人们。
+                她能否守护自己的纯洁……
+                ※寝取的男人除了图片中的角色外还有其他。</P>
+            <p>◆战斗中的色情◆
+                战斗中部分敌人会发动H的攻击。
+                敌人会撕破衣服，试图在脱掉衣物后进行性行为，因此在此之前击败他们是至关重要的。（有服装损坏差分）
+                ※战斗中的色情共有6种。</p>
+        </div>
+        <div><a href="https://share.weiyun.com/6zHhVY5R" class="yanse">点击下载游戏</a>
+            <a href="https://qm.qq.com/q/IekbXKmPAG">提取码联系客服获取</a>
+        </div>
+        <p class="yanse">如果客服链接失效，请看主页公告获取最新客服链接！</p>
+
+        <div class="password-container" id="password-container">
+            <div class="password-section">
+                <input type="password" id="passwordInput" placeholder="输入密码" />
+                <button onclick="checkPassword()">确认</button>
+                <a href="https://qm.qq.com/q/IekbXKmPAG" id="contactButton" class="contact-btn"
+                    target="_blank">访问密码请联系客服</a>
+            </div>
+            <div id="passwordMessage"></div>
+        </div>
+    </div>
+
+    <script>
+        const imageFolderPath = '../image1/拉皮内斯·萨菲亚 ～淫缚的10时空～挂载AI汉化版/';
+        const totalImages = 7;
+        const password = "ab2658"; // 设置你想要的密码
+        let imageCountLoading = 0;
+
+        window.onload = function () {
+            renderImages();
+            startSlideshow('adSlideshow1'); // 启动第一个广告轮播
+            startSlideshow('adSlideshow2'); // 启动第二个广告轮播
+            startSlideshow('adSlideshow3'); // 启动第三个广告轮播
+            startSlideshow('adSlideshow4'); // 启动第三个广告轮播
+        };
+
+        function renderImages() {
+            const mainImage = document.getElementById('mainImage');
+            const imageContainer = document.getElementById('image-container');
+
+            mainImage.src = `${imageFolderPath}1.jpg`;
+            imageContainer.innerHTML = '';
+            // 清空之前的图片
+
+            // 加载前8张描述图
+            for (let i = 0; i < 6; i++) { // 从0到7，共8张
+                const imgElement = document.createElement('div');
+                imgElement.className = 'image-item';
+                imgElement.innerHTML = `<img src="${imageFolderPath}${i + 2}.jpg" alt="商品描述图 ${i + 2}" onload="checkImageCount()">`;
+                imageContainer.appendChild(imgElement);
+            }
+        }
+
+        function checkImageCount() {
+            imageCountLoading++;
+            if (imageCountLoading === 8) {
+                document.getElementById('passwordMessage').innerText = '请输入密码以查看更多图片';
+            }
+        }
+
+        function renderRemainingImages() {
+            const imageContainer = document.getElementById('image-container');
+            for (let i = 8; i < totalImages; i++) { // 从第9张开始加载
+                const imgElement = document.createElement('div');
+                imgElement.className = 'image-item';
+                imgElement.innerHTML = `<img src="${imageFolderPath}${i + 1}.jpg" alt="商品描述图 ${i + 1}">`;
+                imageContainer.appendChild(imgElement);
+            }
+        }
+
+        function checkPassword() {
+            const input = document.getElementById('passwordInput').value;
+            if (input === password) {
+                // 如果密码正确，继续显示后续图片，且隐藏输入框和客服按钮
+                renderRemainingImages();
+                document.getElementById('password-container').style.display = 'none'; // 隐藏密码输入框
+                document.getElementById('passwordMessage').innerText = ''; // 清除提示信息
+                document.getElementById('contactButton').style.display = 'none'; // 隐藏联系客服按钮
+            } else {
+                document.getElementById('passwordMessage').innerText = '密码错误，请重试！';
+            }
+        }
+
+        function startSlideshow(slideshowId) {
+            const slideshow = document.getElementById(slideshowId);
+            const images = slideshow.getElementsByTagName('img');
+            let index = 0;
+
+            function showNextImage() {
+                images[index].classList.remove('active');
+                index = (index + 1) % images.length;
+                images[index].classList.add('active');
+            }
+
+            setInterval(showNextImage, 3000); // 每3秒切换一次图片
+        }
+    </script>
+</body>
+
+</html>

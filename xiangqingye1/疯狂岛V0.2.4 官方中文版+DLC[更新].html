@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>详情</title>
+    <style>
+        /* 基本样式 */
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+        }
+
+        h1 {
+            color: #323232;
+            margin-top: 10px;
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .main-image img {
+            max-width: 100%;
+            height: auto;
+            /* 保持比例 */
+        }
+
+        .ad-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 900px;
+            padding: 1px 1px 1px 1px;
+            margin-top: 20px;
+            background-color: #f97dd8;
+            /* 设置广告背景色 */
+        }
+
+        .ad-item {
+            width: 32%;
+            position: relative;
+        }
+
+        .ad-slideshow img {
+            width: 100%;
+            height: auto;
+            display: none;
+        }
+
+        .ad-slideshow img.active {
+            display: block;
+        }
+
+        .image-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            width: 100%;
+            padding: 10px;
+            max-width: 900px;
+            /* 限制最大宽度 */
+        }
+
+        .image-item img {
+            width: 100%;
+            height: auto;
+            /* 保持比例 */
+        }
+
+        .password-container {
+            margin: 20px;
+        }
+
+        .password-section {
+            display: flex;
+            align-items: center;
+            /* 设置为水平排列 */
+            gap: 20px;
+        }
+
+        #passwordMessage {
+            color: red;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 8px 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .contact-btn {
+            background-color: #f44336;
+            text-decoration: none;
+            color: white;
+            display: inline-block;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+
+        .contact-btn:hover {
+            background-color: #d32f2f;
+        }
+
+        .ad-description {
+            text-align: center;
+            font-size: 18px;
+            color: #323232;
+            margin-top: 12px;
+            /* 设置广告描述字体大小 */
+            padding: 10px;
+            background-color: #ffffff;
+            max-width: 900px;
+            width: 100%;
+            /* 限制最大宽度 */
+            border-radius: 4px;
+            /* 圆角 */
+            box-shadow: 0px 0px 10px #888888;
+            /* 阴影 */
+            font-family: 仿宋, sans-serif;
+            /* 字体 */
+            font-weight: bold;
+            /* 加粗 */
+            text-indent: 2em;
+            /* 首行缩进 */
+            text-align: justify;
+            /* 两端对齐 */
+        }
+
+        .yanse {
+            color: rgb(219, 12, 122)
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>详情</h1>
+        <div class="main-image">
+            <img id="mainImage" src="" alt="主图">
+        </div>
+
+        <!-- 广告容器，水平排列的广告轮播 -->
+        <div class="ad-container">
+            <!-- 第一个广告区域 -->
+            <div class="ad-item">
+                <div class="ad-slideshow" id="adSlideshow1">
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/性感模特夏西貌美大长腿很迷人/2.jpg" class="active" alt="广告1-1">
+                    </a>
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/宅男女神晓鱼酱情趣内衣美艳四射/3.jpg" alt="广告1-2">
+                    </a>
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/私房鼻祖王雨纯秀巨乳好身材看得见/4.jpg" alt="广告1-3">
+                    </a>
+                </div>
+            </div>
+            <!-- 第二个广告区域 -->
+            <div class="ad-item">
+                <div class="ad-slideshow" id="adSlideshow2">
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/天然呆萌小妹麻花酱身材好很诱人/7.jpg" class="active" alt="广告2-1">
+                    </a>
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/越南学生妹Azami火爆身材非常惊艳/1.jpg" alt="广告2-2">
+                    </a>
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/抹油少女七月喵子情趣束缚大尺度/4.jpg" alt="广告2-3">
+                    </a>
+                </div>
+            </div>
+            <!-- 第三个广告区域 -->
+            <div class="ad-item">
+                <div class="ad-slideshow" id="adSlideshow3">
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/人形奶牛周大萌白皙胴体美乳侧漏/34.jpg" class="active" alt="广告3-1">
+                    </a>
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/性感美女豆瓣酱火辣身材任君摆布/47.jpg" alt="广告3-2">
+                    </a>
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/迷情圣诞米线线情趣死库水大秀蜜臀/27.jpg" alt="广告3-3">
+                    </a>
+                </div>
+            </div>
+            <div class="ad-item">
+                <div class="ad-slideshow" id="adSlideshow4">
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/巨乳嫩模糯美子丰腴胴体白皙可口/28.jpg" class="active" alt="广告3-1">
+                    </a>
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/韩国性感萌妹子孙乐乐湿身艺术写真/43.jpg" alt="广告3-2">
+                    </a>
+                    <a href="../meituxiangqing/meituxiangqing.html" target="_blank">
+                        <img src="../image/韩国女神Zenny紧身死库水室外裸身/36.jpg" alt="广告3-3">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 添加独立的文本描述 -->
+        <div class="ad-description">
+            <p>分享一款超高自由度的沙盒2D游戏的最新版本：[更新]疯狂岛V0.2.4 官方中文版+DLC（Mad
+                Island）游戏概述：这是一款自由度超高的开放世界沙盒ACT+SLG结合的荒岛生存游戏。完全可媲美少女卷轴甚至超越的2D大作，游戏更新后精简容量到1G左右！内容已十分丰富，在荒岛上的男女主可随时选择替换操作，自带H全回想。选女主被岛上原住民OX，选男主去OX岛上的女原住民，貌似更新人鱼了~内容丰富到爆炸，在岛上拾取各种材料搭建和生产，捕获RBQ等奇妙玩法！想干啥就干啥，偌大岛不够还可下海去探索，不但有人鱼美眉，还有鲨鱼…游戏简介：一款自由度高到极限的沙盒ACT+SLG荒岛探索生存和发展的动作模拟游戏。概括来说，游戏包含以下要素：探索/生存/建设/生产/捕获/RBQ等。双主角男女可自由切换，可自由DIY人物外型，男主可推人，女主战败被推。游戏里通过工作台可制造大量物品装备用于建设据点，提升生产力。男主可捕获女NPC回來关笼子里升满好感度后当村民，可上可指令工作。村庄全灭后NPC会定期自动刷新，不怕空城。也可以去捕抓野生珍兽（狼人/金刚/安康熊等）用于随从护卫。总之就是一款游戏要素丰富到爆炸的大型沙盒…操作方法：所有的操作都可以用鼠标来完成，但是也可以用部分键盘来完成。鼠标操作向左单击长按所按的方向移动点击敌人或物体，接近点击的目标进行攻击和使用。鼠标滚轮拖动相机上下左右移动
+                鼠标滚轮前后移动相机(缩放)操作清单插槽左键单击: 移动物品，将物品放在库存之外并丢弃物品右键单击: 项目(消费品，设备，建筑物等)可以通过右键单击使用。您可以通过 shift +
+                左键点击打开箱子或装备栏来快速传输物品。键盘操作W/A/S/D 移動Shift + 移動：走るSpace原地攻击(瞄准目标or 游标方向)F 重型攻击(只能在装备武器时使用，瞄准目标 or 游标方向)R
+                抓地力(仅限男主角)抓地力后，用左右点击削减晕车值再次取消rX 跑固定的on/off使用数字键库存项目(最左边为0)M 图ESC 姿势隐藏 tab
+                设置菜单关于鱼饵和箭等消耗品优先使用清单左侧的清单。双主角游戏中有两个主角。故事以女主角开始，但到达小岛后，您可以随时切换到男主角。原住民原住民在岛上生活。他们白天在外面活动，晚上回家睡得很沉。您可以在夜间潜入到他们的住所，也可以捕捉、喂养或奴役他们。您还可以为他们分配工作，如伐木、采矿、田间劳作等。您可以促成或限制原住民之间的恋情。敌人、怪物和朋友在不同的地点有许多敌人和怪物。您可以询问他们来到岛上的原因，有时他们会成为您的同伴。打败怪物、让它们昏厥或喂养它们，也能让它们成为您的同伴。带上您强大的同伴一起去冒险吧。角色定制您可以自定义自己和其他NPC的外观。使用装置的话，您甚至可以移除胳膊、腿和胸部！如果您有喜欢的女孩，可以为她换上漂亮的衣服。手工艺品10多个不同的工作台可以制作出各种各样的物品。防护具、武器、盾牌、衣服、刑具、饲养栅栏、性玩具、季节性装饰品、菜肴等等。您可以随心所欲地建造自己的城寨。耕种、采矿、采集和捕鱼您可以播种和种植蔬菜，制作新菜肴。可以根据地点捕获各种鱼类。等级提升和获得技能您可以在战斗、采矿、采集等过程中提升等级。随着等级的提高，您可以增加攻击力和奔跑速度。技能也会同时升级，您可以获得想要的技能。探索洞穴和遗迹每个洞穴和遗迹都有自己的关卡，越往深处走，就会出现危险的BOSS，也能获得强大的武器。洞穴中还有陷阱，因此要小心前行。游戏小技巧：1、捕获。无论NPC还是野兽，均可使用棒类武器敲晕后捕获并转化为自己人，针对女NPC，捕获方式额外增加男主按R强推，晚上进帐篷强推，用药等方式。随你喜欢。2、装备。前期可尽快推进科技至铁工作台，铁刀和铁盾能无脑用到中后期。另有大佬测试“弓是神器，可拉弓（按住右键）点击左键射箭（BUG？：不带箭，近战点击右键拉弓=攻击一次，攻速=手速）无敌。但是弓优先度高于盾，没法同时使用效果，记得走位。”此方法我还没用过，是其他大佬的测试。3、游戏初始界面的“EDIT”可自定义男女主外观。4、传送。后期路途遥远，跑步效率太低，可通过使用制作的红旗后，在地图界面点击红旗消耗饱腹度来传送，提高效率。5、工作台相关：木台和铁台自己做，其余需通过地图直接开宝箱或触发事件（打BOSS）后取得。
+            </p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+
+        </div>
+
+        <div class="image-container" id="image-container"></div>
+
+        <div class="ad-description">
+            <P>更新日志：发布日期12月15日周日更新版本 v0.2.4 [测试版]新增内容■ 新增H内容男主角 × 圣诞老人（标准H场景）■
+                新增内容-圣诞老人事件-2个新NPC-超过30个新物品，包括新装饰品和服装-相框（用于展示图标的物品）■
+                修复与调整-修复了正在进行的事件图标在地图上显示的错误。-为Sally的投掷攻击增加了伤害。-修复了标题屏幕上订阅的工作坊物品列表限制为50个的问题。-预览模式中增加了装备预览功能。</P>
+            <P></P>
+            <P></P>
+            <P></P>
+            <P></P>
+        </div>
+        <div><a href="https://share.weiyun.com/0gmLO7Ny" class="yanse">点击下载游戏</a>
+            <a href="https://qm.qq.com/q/IekbXKmPAG">提取码联系客服获取</a>
+        </div>
+        <p class="yanse">如果客服链接失效，请看主页公告获取最新客服链接！</p>
+
+        <div class="password-container" id="password-container">
+            <div class="password-section">
+                <input type="password" id="passwordInput" placeholder="输入密码" />
+                <button onclick="checkPassword()">确认</button>
+                <a href="https://qm.qq.com/q/IekbXKmPAG" id="contactButton" class="contact-btn"
+                    target="_blank">访问密码请联系客服</a>
+            </div>
+            <div id="passwordMessage"></div>
+        </div>
+    </div>
+
+    <script>
+        const imageFolderPath = '../image2/疯狂岛V0.2.4 官方中文版+DLC[更新]/';
+        const totalImages = 7;
+        const password = "ab2658"; // 设置你想要的密码
+        let imageCountLoading = 0;
+
+        window.onload = function () {
+            renderImages();
+            startSlideshow('adSlideshow1'); // 启动第一个广告轮播
+            startSlideshow('adSlideshow2'); // 启动第二个广告轮播
+            startSlideshow('adSlideshow3'); // 启动第三个广告轮播
+            startSlideshow('adSlideshow4'); // 启动第三个广告轮播
+        };
+
+        function renderImages() {
+            const mainImage = document.getElementById('mainImage');
+            const imageContainer = document.getElementById('image-container');
+
+            mainImage.src = `${imageFolderPath}1.jpg`;
+            imageContainer.innerHTML = '';
+            // 清空之前的图片
+
+            // 加载前8张描述图
+            for (let i = 0; i < 6; i++) { // 从0到7，共8张
+                const imgElement = document.createElement('div');
+                imgElement.className = 'image-item';
+                imgElement.innerHTML = `<img src="${imageFolderPath}${i + 2}.jpg" alt="商品描述图 ${i + 2}" onload="checkImageCount()">`;
+                imageContainer.appendChild(imgElement);
+            }
+        }
+
+        function checkImageCount() {
+            imageCountLoading++;
+            if (imageCountLoading === 8) {
+                document.getElementById('passwordMessage').innerText = '请输入密码以查看更多图片';
+            }
+        }
+
+        function renderRemainingImages() {
+            const imageContainer = document.getElementById('image-container');
+            for (let i = 8; i < totalImages; i++) { // 从第9张开始加载
+                const imgElement = document.createElement('div');
+                imgElement.className = 'image-item';
+                imgElement.innerHTML = `<img src="${imageFolderPath}${i + 1}.jpg" alt="商品描述图 ${i + 1}">`;
+                imageContainer.appendChild(imgElement);
+            }
+        }
+
+        function checkPassword() {
+            const input = document.getElementById('passwordInput').value;
+            if (input === password) {
+                // 如果密码正确，继续显示后续图片，且隐藏输入框和客服按钮
+                renderRemainingImages();
+                document.getElementById('password-container').style.display = 'none'; // 隐藏密码输入框
+                document.getElementById('passwordMessage').innerText = ''; // 清除提示信息
+                document.getElementById('contactButton').style.display = 'none'; // 隐藏联系客服按钮
+            } else {
+                document.getElementById('passwordMessage').innerText = '密码错误，请重试！';
+            }
+        }
+
+        function startSlideshow(slideshowId) {
+            const slideshow = document.getElementById(slideshowId);
+            const images = slideshow.getElementsByTagName('img');
+            let index = 0;
+
+            function showNextImage() {
+                images[index].classList.remove('active');
+                index = (index + 1) % images.length;
+                images[index].classList.add('active');
+            }
+
+            setInterval(showNextImage, 3000); // 每3秒切换一次图片
+        }
+    </script>
+</body>
+
+</html>

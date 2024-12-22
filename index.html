@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIANG NV BA</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* 简单的CSS样式，调整标签的样式 */
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            /* 允许换行 */
+            justify-content: flex-start;
+            overflow: hidden;
+            /* 隐藏超出部分 */
+            animation: slideIn 6s forwards;
+            /* 整体滑入动画 */
+        }
+
+        .card {
+            border: 10px solid #ccc;
+            margin: 10px;
+            padding: 10px;
+            text-align: center;
+            opacity: 1;
+            /* 初始不透明度 */
+            animation: fadeIn 0.5s forwards;
+            /* 渐显动画 */
+            width: calc(25% - 20px);
+            /* 每行四列，减去左右margin */
+            box-sizing: border-box;
+            /* 确保padding和border不影响总宽度 */
+        }
+
+        .card img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* 限制标题为两行，超出隐藏 */
+        .title {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            /* 限制为两行 */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            /* 如果超出则显示省略号 */
+            margin: 0;
+            /* 清除默认margin */
+            font-size: 12px;
+            /* 可根据需要调整字体大小 */
+        }
+
+        .card p {
+            margin: 5px 0 0 0;
+            /* 为价格元素添加一些间距 */
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                /* 初始位置在右侧 */
+            }
+
+            to {
+                transform: translateX(0);
+                /* 移动到原位 */
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                /* 最终不透明度 */
+            }
+        }
+
+        @keyframes continuousZoom {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+                /* 放大5% */
+            }
+        }
+
+        /* 媒体查询：屏幕宽度小于768px时，设置每行显示2列 */
+        @media (max-width: 768px) {
+            .card {
+                width: calc(50% - 20px);
+                /* 每行两列，减去左右margin */
+            }
+        }
+
+        .tag-filter {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .tag-button {
+            padding: 10px 15px;
+            margin: 0 5px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .tag-button:hover {
+            background-color: #471818;
+        }
+
+        .tag-button.active {
+            background-color: #1f81ea;
+            color: white;
+        }
+
+        /* 广告横条样式 */
+        .ad-banner {
+            width: 100%;
+            height: 100%;
+            /* 设置广告栏的固定高度 */
+            background-color: #f0f0f0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            /* 顶部间距 */
+            position: relative;
+        }
+
+        /* 广告图片轮播容器 */
+        .ad-slideshow {
+            display: flex;
+            width: 100%;
+            justify-content: space-around;
+        }
+
+        /* 广告图片的样式 */
+        .ad-slideshow img {
+            width: 100%;
+            /* 确保每张图片占据广告栏的30%宽度 */
+            height: 100%;
+            /* 图片高度充满广告栏的高度 */
+            object-fit: contain;
+            /* 图片按比例缩放，保持完整，不裁剪 */
+        }
+
+        /* 链接样式，确保点击整个图片区域 */
+        .ad-slideshow a {
+            display: block;
+            width: 30%;
+            height: 100%;
+        }
+
+        .ad-description {
+            text-align: center;
+            /* 广告描述文字居中 */
+            font-size: 18px;
+            /* 字体大小 */
+            color: #323232;
+            /* 字体颜色 */
+            margin-top: 10px;
+            /* 顶部间距 */
+            padding: 5px;
+            /* 内边距 */
+            background-color: #f97dd8;
+
+            width: 100%;
+        }
+
+        #searchInput {
+            width: 300px;
+            /* 设置搜索框宽度 */
+            padding: 10px;
+            /* 内边距 */
+            border: 1px solid #ccc;
+            /* 边框样式 */
+            border-radius: 4px;
+            /* 圆角边框 */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            /* 阴影效果 */
+            margin-bottom: 20px;
+            /* 搜索框下面的间距 */
+        }
+
+        #result {
+            background-color: white;
+            /* 设置背景为白色 */
+            border: 1px solid #ccc;
+            /* 边框样式 */
+            padding: 10px;
+            /* 内边距 */
+            max-width: 400px;
+            /* 设置最大宽度为400px */
+            width: 100%;
+            /* 让宽度占满父元素，直到最大宽度 */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            /* 添加阴影效果 */
+        }
+
+        #result div {
+            padding: 5px;
+            /* 每个结果的内边距 */
+            border-bottom: 1px solid #eee;
+            /* 分隔线 */
+        }
+
+        #result div:last-child {
+            border-bottom: none;
+            /* 最后一个结果去掉分隔线 */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* 使内容居中 */
+            margin: 0;
+            /* 清除默认边距 */
+            padding: 1px;
+            /* 为页面添加内边距 */
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">首页</a></li>
+                <li><a href="meituxiangqing/meituxiangqing.html">美图</a></li>
+                <li><a href="shipinxiangqing/shipinxiangqing.html">AV</a></li>
+                <li><a href="抽奖/抽奖.html">抽奖</a></li>
+                <li><a href="抽奖/抽奖.html">会员</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="announcement-container" id="announcement-container">
+        <div class="announcement" id="announcement">
+            <p>公告1：欢迎访问TX游戏站！</p>
+            <p>公告2：专业提供游戏平台、游戏资源、游戏攻略、游戏直播！</p>
+        </div>
+    </div>
+
+    <!-- 广告横条，包含动态显示的图片 -->
+    <div class="ad-banner" id="ad-banner">
+        <div class="ad-slideshow" id="ad-slideshow">
+            <!-- 广告图片将通过JavaScript动态插入 -->
+        </div>
+    </div>
+
+    <input type="text" id="searchInput" placeholder="请输入搜索关键字" onkeyup="searchLinks()">
+    <div id="result"></div>
+    <!-- 添加独立的文本描述 -->
+    <p class="ad-description">此页面展示了最新的游戏资源，快来发现更多惊喜！</p>
+
+    <div class="tag-filter">
+        <button class="tag-button" data-tag="all">所有</button>
+        <button class="tag-button" data-tag="PC">PC </button>
+        <button class="tag-button" data-tag="安卓">安卓</button>
+        <button class="tag-button" data-tag="RPG">RPG</button>
+
+    </div>
+
+    <main>
+        <div class="card-container" id="image-gallery">
+            <!-- 动态生成的卡片将放在这里 -->
+        </div>
+        <div class="pagination" id="pagination">
+            <button id="prev">上一页</button>
+            <button id="next">下一页</button>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-music">
+            <button id="prev-song">上一首</button>
+            <button id="play-pause">播放</button>
+            <button id="next-song">下一首</button>
+            <audio id="audio-player" controls style="display:none;"></audio> <!-- 隐藏默认控件 -->
+        </div>
+        <p>@公司名称 | TX有限公司<br>电话：010-82971111<br>网址：www.txkuozhanban.com<br>客服热线：400-800-8888</p>
+        <p>地址：北京市海淀区西二旗路10号北京邮电大学西门</p>
+
+
+        <a href="#">用户协议</a> | <a href="#">隐私政策</a>
+
+    </footer>
+
+    <script>
+        const imageFolderPath = '封面/';
+        let totalImages = 200; // 总图片数
+        const imagesPerPage = 20; // 每页显示20张图片
+        let currentPage = 1;
+
+        // 获取图片画廊的容器
+        const imageGallery = document.getElementById('image-gallery');
+
+        // 获取分页按钮
+        const prevButton = document.getElementById('prev');
+        const nextButton = document.getElementById('next');
+
+        function updateButtons() {
+            prevButton.disabled = currentPage === 1;
+            nextButton.disabled = currentPage * imagesPerPage >= totalImages;
+        }
+
+        prevButton.addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                loadImages();
+                updateButtons();
+            }
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentPage * imagesPerPage < totalImages) {
+                currentPage++;
+                loadImages();
+                updateButtons();
+            }
+        });
+
+        // 假设这是每张图片对应的价格数组
+        const links = [
+
+            { link: 'xiangqingye1/珍的困境3.60汉化版【PC+安卓.html', price: '九期', tag: '安卓' },
+            { link: 'xiangqingye1/蛇之交响曲V11121 逍遥汉化版【PC+安卓.html', price: '九期', tag: '安卓' },
+
+            { link: 'xiangqingye1/妈妈的秘密家长教师会议1.0海阁版【PC+安卓.html', price: '八期', tag: '安卓' },
+            { link: 'xiangqingye1/麦克斯的幸福生活Ch.5.0.55汉化版【PC+安卓.html', price: '八期', tag: '安卓' },
+            { link: 'xiangqingye1/绝对统治重做0.3.2汉化版.html', price: '八期', tag: '安卓' },
+            { link: 'xiangqingye1/你所能做的、只有按下按钮 挂载AI汉化版+存档[新汉化].html', price: '八期', tag: '安卓' },
+
+            { link: 'xiangqingye1/艾米莉娅的日记 官方中文版★兔女郎[新官中].html', price: '八期', tag: '安卓' },
+            { link: 'xiangqingye1/色情战争V1.2 挂载AI汉化版+存档[新汉化].html', price: '八期', tag: '安卓' },
+            { link: 'xiangqingye1/异世界树的巫女～用魔法触摸尽情做色色的事.html', price: '八期', tag: 'PC' },
+            { link: 'xiangqingye1/伊莉丝☆编年史 个人汉化版+存档[新汉化].html', price: '八期', tag: 'PC' },
+
+            { link: 'xiangqingye1/女巫训练师第一集0.2.7p汉化版【PC+安卓.html', price: '八期', tag: 'PC' },
+            { link: 'xiangqingye1/新鲜物语S2.1.0.1汉化版【PC+安卓.html', price: '八期', tag: 'PC' },
+            { link: 'xiangqingye1/罪恶之夏：禁忌之爱的故事2.6汉化版【PC+安卓.html', price: '八期', tag: 'PC' },
+            { link: 'xiangqingye1/爱与恨之神0.2汉化版【PC+安卓.html', price: '八期', tag: 'PC' },
+
+            { link: 'xiangqingye1/12月新版 Summer For You 0.5.html', price: '八期', tag: 'PC' },
+            { link: 'xiangqingye1/最佳妈妈0.4汉化版【PC+安卓.html', price: '八期', tag: 'PC' },
+            { link: 'xiangqingye1/疯狂岛V0.2.4 官方中文版+DLC[更新].html', price: '八期', tag: 'PC' },
+            { link: 'xiangqingye1/配种压力机1.0.2海阁版【PC+安卓.html', price: '八期', tag: 'PC' },
+
+            { link: 'xiangqingye1/国王的故事0.7汉化版【PC+安卓.html', price: '八期', tag: 'PC' },
+            { link: 'xiangqingye1/帝国编年史0.7汉化版【PC+安卓.html', price: '八期', tag: 'PC' },
+            { link: 'xiangqingye1/奥通0.1.6汉化版【PC+安卓.html', price: '八期', tag: 'PC' },
+            { link: 'xiangqingye1/生命的竞赛Ep.3.2汉化版.html', price: '八期', tag: 'PC' },
+
+            { link: 'xiangqingye1/孕之农场～精灵后宫与世界树的牧场～挂载AI汉化版.html', price: '七期', tag: 'PC' },
+            { link: 'xiangqingye1/卡尔米亚小姐在优雅皇家地下城啦!!!挂载AI汉化版+存档[新汉化] （カルミアお嬢様IN・THE[エ]レガンス[ロ]イヤルおダンジョンですわ～!!）.html', price: '七期', tag: 'PC' },
+            { link: 'xiangqingye1/哀木营地v0.0.13.4汉化版【PC+安卓.html', price: '七期', tag: 'PC' },
+            { link: 'xiangqingye1/女神降临 Arrival of the Goddess v1.051 附带全cg存档 【电脑.html', price: '七期', tag: 'PC' },
+
+            { link: 'xiangqingye1/恶性循环：女性统治版0.9汉化版【PC+安卓.html', price: '七期', tag: 'PC' },
+            { link: 'xiangqingye1/九点开张 Bui.html', price: '七期', tag: 'PC' },
+            { link: 'xiangqingye1/办公室福利0.1.4汉化版【PC+安卓.html', price: '七期', tag: 'PC' },
+            { link: 'xiangqingye1/爱情的诱惑2.2汉化版【PC+安卓.html', price: '七期', tag: 'PC' },
+
+            { link: 'xiangqingye1/龙征服1.1【PC+安卓.html', price: '七期', tag: 'PC' },
+            { link: 'xiangqingye1/红樱花馆2v1.15汉化版【PC+安卓.html', price: '七期', tag: 'PC' },
+            { link: 'xiangqingye1/宇宙冒险1.0【PC+安卓.html', price: '七期', tag: 'PC' },
+            { link: 'xiangqingye1/混蛋英雄Ep.2.3.2.4p汉化版【PC+安卓.html', price: '七期', tag: 'PC' },
+
+            { link: 'xiangqingye1/和兄控妹妹一起挑战异世界1.0【PC+安卓.html', price: '七期', tag: 'PC' },
+            { link: 'xiangqingye1/淫欲地牢 pc+安卓[官中] Ero Dungeons v1.0正式版.html', price: '七期', tag: 'PC' },
+            { link: 'xiangqingye1/逆转之心 早期体验版.html', price: '七期', tag: 'PC' },
+            { link: 'xiangqingye1/卡尔瓦先生家的欢乐抗病生活 UC.html', price: '七期', tag: 'PC' },
+
+            { link: 'xiangqingye1/久木酱的生活真是一团糟！.html', price: '七期', tag: 'PC' },
+            { link: 'xiangqingye1/NTR女祭司 0.75 【更新】 Nymphomania Priestess v0.75.html', price: '七期', tag: 'PC' },
+            { link: 'xiangqingye1/天堂里的麻烦1.9汉化版【PC+安卓.html', price: '七期', tag: 'PC' },
+            { link: 'xiangqingye1/弹跳机构0.20汉化版【PC+安卓.html', price: '七期', tag: 'PC' },
+
+            { link: 'xiangqingye1/维纳斯花园v0.4汉化版【PC+安卓.html', price: '六期', tag: 'PC' },
+            { link: 'xiangqingye1/星梦v0.58汉化版【PC+安卓.html', price: '六期', tag: 'PC' },
+            { link: 'xiangqingye1/杰森：即将成年v0.11.1汉化版【PC+安卓3.96G更新】.html', price: '六期', tag: '安卓' },
+            { link: 'xiangqingye1/网络流浪 101第一季汉化版【PC+安卓3.79G更新】.html', price: '六期', tag: '安卓' },
+
+            { link: 'xiangqingye1/昔日的阴影0.4汉化版【PC+安卓4.46G更新】.html', price: '六期', tag: '安卓' },
+            { link: 'xiangqingye1/闪光圣姬马尾天星 官方中文步兵版+存档[新作]【电脑1.6G】.html', price: '六期', tag: '安卓' },
+            { link: 'xiangqingye1/社群审查 エロ检阅者 The Censor Demo 2.0.6 Steam官中步兵版【电脑230M】.html', price: '六期', tag: '安卓' },
+            { link: 'xiangqingye1/为了不便宜别人我要狠狠的爆肏白虎嫩逼乖女儿 母女盖饭肉便器 まな娘の肉体【3G】.html', price: '六期', tag: '安卓' },
+
+            { link: 'xiangqingye1/东区0.6.2汉化版【PC+安卓4.53G更新】.html', price: '六期', tag: '安卓' },
+            { link: 'xiangqingye1/罪孽高跟鞋Ep.2P2.1.6汉化版【PC+安卓1.69G更新】.html', price: '六期', tag: '安卓' },
+            { link: 'xiangqingye1/NTR女祭司 Ver0.8 重制【PC3.17G】.html', price: '六期', tag: '安卓' },
+            { link: 'xiangqingye1/少���异闻录：白鹭白百合的华丽日常 V1.01【PC1.16G】.html', price: '六期', tag: '安卓' },
+
+            { link: 'xiangqingye1/保利托农0.18汉化版【PC+安卓5.94G更新】.html', price: '六期', tag: '安卓' },
+            { link: 'xiangqingye1/我们的肉便老师游戏：不良母亲的变态生活1.0【PC+安卓1.06G】.html', price: '六期', tag: '安卓' },
+            { link: 'xiangqingye1/乡下生活1.0修复版【安卓839MB】.html', price: '六期', tag: '安卓' },
+            { link: 'youxixiangqing/冬日狂想曲1.02：完结【安卓412MB】.html', price: '六期', tag: '安卓' },
+
+            { link: 'youxixiangqing/艾莱茵的冒险之旅 STEAM官方中文.html', price: '六期', tag: '安卓' },
+            { link: 'youxixiangqing/旅店老板和亚人奴 宿屋の店主と亜人奴○～安宿の収入では暮らせないのでダンジョンでも稼ぐことにした～.html', price: '六期', tag: '安卓' },
+            { link: 'youxixiangqing/让我得到您的赏赐 AI汉化版+全CG存档 （ごくかの！ ～タマとらせてもらいます～）.html', price: '六期', tag: '安卓' },
+            { link: 'youxixiangqing/性交封印！装备诅咒内裤的女剑士 AI汉化版+全CG存档 （性交封印!呪いのパンツを装備した女剣士）.html', price: '六期', tag: '安卓' },
+
+            { link: 'xiangqingye1/尤里恶魔v0.2汉化版【PC+安卓310MB更新】.html', price: '五期', tag: '安卓' },
+            { link: 'youxixiangqing/性爱诊所（Sex Clinic 18+）STEAM官中.html', price: '五期', tag: '安卓' },
+            { link: 'youxixiangqing/魔物娘之馆 彗星馆异形录～人鱼之篇～AI汉化版+全CG存档.html', price: '五期', tag: '安卓' },
+            { link: 'youxixiangqing/【ADV汉化】魔法少女火憐：恶堕姐妹于淫狱竞技场中消失 特典.html', price: '五期', tag: '安卓' },
+
+            { link: 'youxixiangqing/【RPG汉化】恶魔迷宫 【安卓】.html', price: '五期', tag: '安卓' },
+            { link: 'youxixiangqing/【日式RPG汉化】恶魔追猎者 【安卓】 Devil Slayer.html', price: '五期', tag: '安卓' },
+            { link: 'youxixiangqing/【国产游戏】极品采花郎+全通存档【PC9.21版本4G】.html', price: '五期', tag: '安卓' },
+            { link: 'youxixiangqing/后宫大酒店 Harem Hotel v0.17.2 官方中文版[PC+安卓].html', price: '五期', tag: '安卓' },
+
+            { link: 'youxixiangqing/康乃馨俱乐部4.4【PC+安卓.html', price: '五期', tag: '安卓' },
+            { link: 'youxixiangqing/魔女的性爱囚禁 1.28FIX 官方中文版【PC】【安卓】.html', price: '五期', tag: '安卓' },
+            { link: 'youxixiangqing/恢复她的职业生涯 V0.30【安卓+PC】全汉化高清版.html', price: '五期', tag: '安卓' },
+            { link: 'youxixiangqing/湖边小屋0.38汉化版【PC+安卓.html', price: '五期', tag: '安卓' },
+
+            { link: 'youxixiangqing/棘罪修女-伊妮莎 v0.6.5ThornSin v0.6.5无码.html', price: '五期', tag: 'SLG' },
+            { link: 'youxixiangqing/伊丽莎白的流放v0.8 VIP汉化版【PC+安卓.html', price: '五期', tag: '安卓' },
+            { link: 'youxixiangqing/左手魔法20P汉化版【PC+安卓.html', price: '五期', tag: '安卓' },
+            { link: 'youxixiangqing/苏丹的后宫v0.5.4汉化版【PC+安卓.html', price: '五期', tag: '安卓' },
+
+            { link: 'youxixiangqing/我的第二次机会Ep.16汉化版【PC+安卓.html', price: '五期', tag: '安卓' },
+            { link: 'youxixiangqing/圣魔物娘学园 AI汉化版+全CG存档 （聖もんむす学園）.html', price: '五期', tag: 'PC' },
+            { link: 'youxixiangqing/怀孕人妻2 AI汉化版+全CG存档.html', price: '五期', tag: 'SLG' },
+            { link: 'youxixiangqing/独裁王的色情命令 【安卓】 独裁王のエロ命令.html', price: '五期', tag: 'SLG' },
+
+            { link: 'youxixiangqing/爷爷，振作起来吧♪ ～活泼孙女的性护理.html', price: '四期', tag: 'SLG' },
+            { link: 'youxixiangqing/拜托，叫我妈妈！～想成为义母的女人和想成为恋人的我.html', price: '四期', tag: 'SLG' },
+            { link: 'youxixiangqing/我的幸福人生V1.2 官方中文版【PC+安卓.html', price: '四期', tag: 'RPG' },
+            { link: 'youxixiangqing/妻子的困境重温v0.60汉化版【PC+安卓.html', price: '四期', tag: '安卓' },
+
+            { link: 'youxixiangqing/失忆症v0.100a汉化版【PC+安卓.html', price: '四期', tag: '安卓' },
+            { link: 'youxixiangqing/保姆0.1.1Part3汉化版【PC+安��.html', price: '四期', tag: '安卓' },
+            { link: 'youxixiangqing/爱与诱惑Ep.5 S2汉化版【PC+安卓.html', price: '四期', tag: '安卓' },
+            { link: 'youxixiangqing/欲望之影：尤莉亚的激情Ch.3汉化版【PC+安卓.html', price: '四期', tag: '安卓' },
+
+            { link: 'youxixiangqing/蛇之交响曲V06101 逍遥汉化版[更新]【电脑.html', price: '四期', tag: 'PC' },
+            { link: 'youxixiangqing/私人生活0.27汉化版【PC+安卓.html', price: '四期', tag: '安卓' },
+            { link: 'youxixiangqing/权力的代价Ch.24汉化版【PC+安卓.html', price: '四期', tag: '安卓' },
+            { link: 'youxixiangqing/项目：可能v0.16汉化版【PC+安卓.html', price: '四期', tag: '安卓' },
+
+            { link: 'youxixiangqing/新尾巴v0.2.2汉化版【PC+安卓.html', price: '四期', tag: '安卓' },
+            { link: 'youxixiangqing/法师的磨难v0.23.0汉化版【PC+安卓.html', price: '四期', tag: '安卓' },
+            { link: 'youxixiangqing/真理的力量0.0.7Ch.1P2汉化版【PC+安卓.html', price: '四期', tag: '安卓' },
+            { link: 'youxixiangqing/短小战士 【安卓】 MARRIAGE OR PERVERT.html', price: '四期', tag: '安卓' },
+
+            { link: 'youxixiangqing/短暂的爱里斯 【安卓】.html', price: '四期', tag: '安卓' },
+            { link: 'youxixiangqing/傲娇姐姐一直缠着我，我选择无视，结果突然被袭击了.html', price: '四期', tag: 'SLG' },
+            { link: 'youxixiangqing/对魔剑士尤娜 【安卓】.html', price: '四期', tag: 'SLG' },
+            { link: 'youxixiangqing/断念的女骑士 【安卓】.html', price: '四期', tag: 'SLG' },
+
+            { link: 'youxixiangqing/诱惑竞技场1.0海阁移植【PC+安卓.html', price: '三期', tag: 'SLG' },
+            { link: 'youxixiangqing/双重感知4.2汉化版【PC+安卓.html', price: '三期', tag: '安卓' },
+            { link: 'youxixiangqing/我的忠诚妻子v0.2汉化版【PC+安卓.html', price: '三期', tag: '安卓' },
+            { link: 'youxixiangqing/欲望的束缚Ep.3.5汉化版【PC+安卓.html', price: '三期', tag: '安卓' },
+
+            { link: 'youxixiangqing/回家v8.18.1汉化版【PC+安卓.html', price: '三期', tag: '安卓' },
+            { link: 'youxixiangqing/生命与探索Ch.5.07汉化版【PC+安卓.html', price: '三期', tag: 'RPG' },
+            { link: 'youxixiangqing/高等社会v0.64汉化版【PC+安卓.html', price: '三期', tag: '安卓' },
+            { link: 'youxixiangqing/婚闹~Wedding Hazing 官方中文版[【电脑.html', price: '三期', tag: 'PC' },
+
+            { link: 'youxixiangqing/闪闪��光的雨0.6汉化版【PC+安卓.html', price: '三期', tag: '安卓' },
+            { link: 'youxixiangqing/异世界妓院v0.44汉化版【PC+安卓.html', price: '三期', tag: '安卓' },
+            { link: 'youxixiangqing/顽皮海盗v0.19汉化版【PC+安卓.html', price: '三期', tag: '安卓' },
+            { link: 'youxixiangqing/世界驯兽师0.14.0汉化版【PC+安卓.html', price: '三期', tag: '安卓' },
+
+            { link: 'youxixiangqing/幻想后宫：女主角0.9710汉化版【PC+安卓.html', price: '三期', tag: '安卓' },
+            { link: 'youxixiangqing/黑暗的召唤1.0汉化版【PC+安卓.html', price: '三期', tag: '安卓' },
+            { link: 'youxixiangqing/仙女按摩STEAM官方中文.html', price: '三期', tag: 'SLG' },
+            { link: 'youxixiangqing/破晓夜幕v9.9汉化版.html', price: '三期', tag: 'PC' },
+
+            { link: 'youxixiangqing/鲜花Ep.6汉化版.html', price: '三期', tag: 'PC' },
+            { link: 'youxixiangqing/被施以勃起咒术的禁欲巫女 AI翻译 悶絶巫女 クリ勃起呪術をかけられた禁欲の巫女.html', price: '三期', tag: 'PC' },
+            { link: 'youxixiangqing/暑假乡村生活～决定和年下男孩在农场生活～ Ver1.1.1.html', price: '三期', tag: 'PC' },
+            { link: 'youxixiangqing/对魔师 【安卓】 エ���クシル.html', price: '三期', tag: '安卓' },
+
+
+            { link: 'youxixiangqing/多米娜教活祭品 【安卓】 PENIBAN QUEST.html', price: '二期', tag: '安卓' },
+            { link: 'youxixiangqing/女忍樱花陷阱洞1.0海阁移植【安卓.html', price: '二期', tag: '安卓' },
+            { link: 'youxixiangqing/流浪汉0.8.1汉化版【PC+安卓.html', price: '二期', tag: 'RPG' },
+            { link: 'youxixiangqing/合欢宗女修传 V0.167无码官方中文【电脑.html', price: '二期', tag: 'PC' },
+
+            { link: 'youxixiangqing/流年忆往昔0.1汉化版【PC+安卓.html', price: '二期', tag: '安卓' },
+            { link: 'youxixiangqing/办公室福利v0.1.3汉化版【PC+安卓.html', price: '二期', tag: '安卓' },
+            { link: 'youxixiangqing/小屋-暑假Ep. 6汉化版【PC+安卓.html', price: '二期', tag: '安卓' },
+            { link: 'youxixiangqing/遗憾0.1汉化版【PC+安卓.html', price: '二期', tag: '安卓' },
+
+            { link: 'youxixiangqing/反派的遗产v2.4.9.2汉化版【PC+安卓.html', price: '二期', tag: '安卓' },
+            { link: 'youxixiangqing/持久联系1.19汉化版【PC+安卓.html', price: '二期', tag: '安卓' },
+            { link: 'youxixiangqing/皇后游戏Part2.0.3汉化版【PC+安卓.html', price: '二期', tag: '安卓' },
+            { link: 'youxixiangqing/母亲的奉献0.14汉化版【PC+安卓.html', price: '二期', tag: '安卓' },
+
+            { link: 'youxixiangqing/催眠v1.4.6c汉化版【PC+安卓.html', price: '二期', tag: '安卓' },
+            { link: 'youxixiangqing/麻木v2.4汉化版【PC+安卓.html', price: '二期', tag: '安卓' },
+            { link: 'youxixiangqing/船长v2v0.1汉化版【PC+安卓.html', price: '二期', tag: '安卓' },
+            { link: 'youxixiangqing/你的眼眸命中我心头 全CG存档.html', price: '二期', tag: 'PC' },
+
+            { link: 'youxixiangqing/真红玛瑙~PURE ONYX V0.112.0 官方中文步兵版[更新官中.html', price: '二期', tag: 'PC' },
+            { link: 'youxixiangqing/淫辱圣域 挂载AI汉化版 （淫辱の聖域）.html', price: '二期', tag: 'PC' },
+            { link: 'youxixiangqing/朵拉歌的秘宝 【安卓】.html', price: '二期', tag: '安卓' },
+            { link: 'youxixiangqing/拉皮内斯·萨菲亚 ～淫缚的10时空～挂载AI汉化版.html', price: '二期', tag: 'PC' },
+
+
+            { link: 'youxixiangqing/淫欲洗浴店1.0海阁移植【PC+安卓.html', price: '一期', tag: '安卓' },
+            { link: 'youxixiangqing/激情之风v8.0.0汉化版【PC+安卓.html', price: '一期', tag: '安卓' },
+            { link: 'youxixiangqing/放荡的��步Ep. 3.2汉化版【PC.html', price: '一期', tag: 'PC' },
+            { link: 'youxixiangqing/不道德的故事丽贝卡1.7完结汉化版【PC+安卓.html', price: '一期', tag: '安卓' },
+
+            { link: 'youxixiangqing/粉色处方v0.4汉化版【PC+安卓.html', price: '一期', tag: '安卓' },
+            { link: 'youxixiangqing/金伯利的生活0.13汉化版【PC+安卓.html', price: '一期', tag: '安卓' },
+            { link: 'youxixiangqing/校园英雄0.1汉化版【PC+安卓.html', price: '一期', tag: '安卓' },
+            { link: 'youxixiangqing/规则世界0.33汉化版【PC+安卓.html', price: '一期', tag: '安卓' },
+
+            { link: 'youxixiangqing/夏日之王v0.5.0汉化版【PC+安卓.html', price: '一期', tag: '安卓' },
+            { link: 'youxixiangqing/灵魂情人v0.28汉化版【PC+安卓.html', price: '一期', tag: '安卓' },
+            { link: 'youxixiangqing/租一个男朋友v0.1.2汉化版【PC+安卓.html', price: '一期', tag: '安卓' },
+            { link: 'youxixiangqing/赏金之王0.1汉化版【PC+安卓.html', price: '一期', tag: '安卓' },
+
+            { link: 'youxixiangqing/霓虹之心0.01汉化版【PC+安卓.html', price: '一期', tag: '安卓' },
+            { link: 'youxixiangqing/蜘蛛格温0.0.3汉化版【PC+安卓.html', price: '一期', tag: '安卓' },
+            { link: 'youxixiangqing/旅行打工的莉拉～约定的180天～挂载AI汉化版.html', price: '一期', tag: 'PC' },
+            { link: 'youxixiangqing/堕落的黑暗女武神 【安卓】 Knight Slave.html', price: '一期', tag: '安卓' },
+
+            { link: 'youxixiangqing/豚番出口 AI汉化版.html', price: '一期', tag: 'PC' },
+            { link: 'youxixiangqing/动人的旋律 Ver1.00Extras【PC+安卓】.html', price: '一期', tag: '安卓' },
+            { link: 'youxixiangqing/堕落公主物语 【安卓】 堕ち姫ルーシア物語.html', price: '一期', tag: '安卓' },
+            { link: 'youxixiangqing/堕落公主物语 【安卓】1 .html', price: '一期', tag: '安卓' },
+            // 继续添加链接，价格和标签
+        ];
+
+        // 获取所有标签按钮
+        const tagButtons = document.querySelectorAll('.tag-button');
+
+        // 添加标签按钮点击事件
+        tagButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // 移除所有按钮的active类
+                tagButtons.forEach(btn => btn.classList.remove('active'));
+                // 添加active类到当前点击的按钮
+                button.classList.add('active');
+
+                const selectedTag = button.getAttribute('data-tag');
+                loadImages(selectedTag); // 传递选中的标签
+            });
+        });
+
+        function searchLinks() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = ''; // 清空之前的结果
+
+            // 如果输入为空，直接返回，不显示任何结果
+            if (input === '') {
+                return;
+            }
+
+            links.forEach(linkItem => {
+                // 提取标题，即去掉 'youxixiangqing/' 和 '.html'
+                const title = linkItem.link.replace('youxixiangqing/', '').replace('xiangqingye1/', '').replace('.html', '');
+
+                if (title.toLowerCase().includes(input)) {
+                    const div = document.createElement('div');
+                    const link = document.createElement('a');
+                    link.href = linkItem.link; // 连接到原始链接
+                    link.target = '_blank'; // 在新窗口打开链接
+                    link.textContent = title; // 显示提取后的标题
+                    div.appendChild(link); // 将链接添加到 div
+                    resultDiv.appendChild(div); // 将 div 添加到结果区域
+                }
+            });
+        }
+
+        // 修改loadImages函数
+        function loadImages(selectedTag = 'all') {
+            imageGallery.innerHTML = ''; // 清空图片容器
+
+            const startIndex = (currentPage - 1) * imagesPerPage;
+            const endIndex = Math.min(startIndex + imagesPerPage, links.length);
+
+            for (let i = startIndex; i < endIndex; i++) {
+                if (selectedTag !== 'all' && links[i].tag !== selectedTag) {
+                    continue; // 如果标签不匹配，则跳过
+                }
+
+                const card = document.createElement('div');
+                card.classList.add('card');
+
+                const link = document.createElement('a');
+                link.href = links[i].link; // 设置链接
+                link.target = '_blank'; // 在新窗口打开链接
+                link.style.textDecoration = 'none'; // 清除链接下划线
+
+                const img = document.createElement('img');
+                img.src = `${imageFolderPath}${i + 1}.jpg`; // 根据图片路径
+
+                const title = links[i].link.replace('youxixiangqing/', '').replace('xiangqingye1/', '').replace('.html', '');
+                const titleElement = document.createElement('h3');
+                titleElement.textContent = title;
+                titleElement.classList.add('title'); // 添加类名以应用样式限制
+
+                const priceElement = document.createElement('p');
+                priceElement.textContent = links[i].price;
+
+                link.appendChild(img);
+                link.appendChild(titleElement);
+                link.appendChild(priceElement);
+                card.appendChild(link); // 将链接加入卡片
+
+                imageGallery.appendChild(card); // 添加卡片到画廊
+            }
+
+
+            // 在图片加载后应用持续缩放动画
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card) => {
+                card.style.animation = `continuousZoom 2s ease-in-out infinite`; // 应用缩放动画
+            });
+        }
+
+        // 在初始化时加载所有图片
+
+        loadImages(); // 初始化加载图片
+        updateButtons(); // 初始化按钮状态
+
+        // 定义广告图片数据，三组图片
+        const adImages = [
+            ['image1/广告图/1.jpg', 'image1/广告图/2.jpg', 'image1/广告图/3.jpg'], // 第一组
+            ['image1/广告图/3.jpg', 'image1/广告图/3.jpg', 'image1/广告图/1.jpg'], // 第二组
+            ['image1/广告图/3.jpg', 'image1/广告图/1.jpg', 'image1/广告图/2.jpg']  // 第三组
+        ];
+
+        // 定义广告链接
+        const adLinks = [
+            ['https://example.com/ad1', 'https://example.com/ad2', 'https://example.com/ad3'],
+            ['https://example.com/ad4', 'https://example.com/ad5', 'https://example.com/ad6'],
+            ['https://example.com/ad7', 'https://example.com/ad8', 'https://example.com/ad9']
+        ];
+
+        let currentIndex = 0; // 当前显示的图片索引
+
+        // 获取广告轮播容器
+        const slideshow = document.getElementById('ad-slideshow');
+
+        function loadAds() {
+            // 清空广告轮播容器
+            slideshow.innerHTML = '';
+
+            // 动态生成广告图片，每次显示三组的相应索引的图片
+            for (let i = 0; i < adImages.length; i++) {
+                const imgElement = document.createElement('img');
+                imgElement.src = adImages[i][currentIndex]; // 获取当前组的当前索引的图片
+
+                const linkElement = document.createElement('a');
+                linkElement.href = adLinks[i][currentIndex]; // 设置链接
+                linkElement.target = '_blank'; // 在新窗口打开
+                linkElement.appendChild(imgElement);
+
+                slideshow.appendChild(linkElement); // 添加链接及图片到广告轮播容器
+            }
+
+            // 更新索引
+            currentIndex = (currentIndex + 1) % adImages[0].length; // 循环显示每组的图片
+        }
+
+        // ��3秒切换一次广告图片
+        setInterval(loadAds, 3000);
+
+        // 初始化加载广告
+        loadAds();
+
+        const songs = [
+            'yinyue/015d_035e_010b_67de87e71b44c5fd0fd46af0bbf8e00e.mp3',
+            'yinyue/obj_wo3DlMOGwrbDjj7DisKw_7896511646_017b_2f0d_9cb4_95644dbaf1d7c5037c1fe0ebb099ba7e.mp3',
+            'yinyue/obj_wo3DlMOGwrbDjj7DisKw_13957606465_5f77_6fc2_30dc_f7b87880d01fe0c66b4f25878bbd5df5.mp3'
+            // 添加更多歌曲路径
+        ];
+
+        let currentSongIndex = 0;
+        const audioPlayer = document.getElementById('audio-player');
+
+        function loadSong(index) {
+            audioPlayer.src = songs[index];
+            audioPlayer.play();
+        }
+
+        document.getElementById('play-pause').addEventListener('click', () => {
+            if (audioPlayer.paused) {
+                audioPlayer.play();
+            } else {
+                audioPlayer.pause();
+            }
+        });
+
+        document.getElementById('prev-song').addEventListener('click', () => {
+            currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+            loadSong(currentSongIndex);
+        });
+
+        document.getElementById('next-song').addEventListener('click', () => {
+            currentSongIndex = (currentSongIndex + 1) % songs.length;
+            loadSong(currentSongIndex);
+        });
+
+        // 初始化加载第一首歌
+        loadSong(currentSongIndex);
+
+    </script>
+</body>
+
+</html>
