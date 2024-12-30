@@ -263,7 +263,7 @@
 
     <script>
         const imageFolderPath = '../image2/疯狂岛V0.2.4 官方中文版+DLC[更新]/';
-        const totalImages = 7;
+        const totalImages = 6;
         const password = "ab2658"; // 设置你想要的密码
         let imageCountLoading = 0;
 
@@ -284,7 +284,7 @@
             // 清空之前的图片
 
             // 加载前8张描述图
-            for (let i = 0; i < 6; i++) { // 从0到7，共8张
+            for (let i = 0; i < 5; i++) { // 从0到7，共8张
                 const imgElement = document.createElement('div');
                 imgElement.className = 'image-item';
                 imgElement.innerHTML = `<img src="${imageFolderPath}${i + 2}.jpg" alt="商品描述图 ${i + 2}" onload="checkImageCount()">`;

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>充值动态</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            background-color: #2980b9;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .button-container button {
+            background-color: #2980b9;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-container button:hover {
+            background-color: #3498db;
+        }
+
+        .charge-notifications-container {
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+        }
+
+        .charge-notifications {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .charge-notifications li {
+            padding: 10px;
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+            font-size: 16px;
+            color: #333;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards, scrollUp 10s linear forwards;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes scrollUp {
+            0% {
+                transform: translateY(100%);
+            }
+
+            100% {
+                transform: translateY(-100%);
+            }
+        }
+
+        footer {
+            background-color: #2980b9;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        /* 模态框样式 */
+        .modal {
+            display: none;
+            /* 默认隐藏 */
+            position: fixed;
+            z-index: 1;
+            /* 在其他元素上方 */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* 半透明背景 */
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            width: 50%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-content h2 {
+            margin-bottom: 20px;
+        }
+
+        .modal-content p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .amount-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .amount-buttons button {
+            background-color: #2980b9;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .amount-buttons button:hover {
+            background-color: #3498db;
+        }
+
+        .modal-content button {
+            background-color: #2980b9;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .modal-content button:hover {
+            background-color: #3498db;
+        }
+
+        /* 水平排列 立即充值 和 联系客服 按钮 */
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .action-buttons button {
+            background-color: #2980b9;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            flex: 1;
+            /* 让按钮平分空间 */
+        }
+
+        .action-buttons button:hover {
+            background-color: #3498db;
+        }
+
+        /* 收款码模态框 */
+        .qr-modal {
+            display: none;
+            /* 默认隐藏 */
+            position: fixed;
+            z-index: 2;
+            /* 在充值模态框之上 */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            /* 半透明背景 */
+        }
+
+        .qr-modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            width: 50%;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .qr-modal-content img {
+            width: 200px;
+            height: 200px;
+        }
+
+        .close-btn {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .close-btn:hover {
+            background-color: #e74c3c;
+        }
+
+        footer {
+            background-color: #2980b9;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            充值动态
+        </header>
+
+        <div class="button-container">
+            <button onclick="handleRecharge()">充值</button>
+            <button onclick="viewHistory()">X记录</button>
+            <button onclick="openSettings()">X设置</button>
+        </div>
+
+        <!-- 动态充值消息区域 -->
+        <div class="charge-notifications-container">
+            <ul id="chargeNotifications" class="charge-notifications">
+                <!-- 动态充值消息会被插入到这里 -->
+            </ul>
+        </div>
+    </div>
+
+    <!-- 充值选择模态框 -->
+    <div id="rechargeModal" class="modal">
+        <div class="modal-content">
+            <h2>充值确认</h2>
+            <p>请选择充值金额：</p>
+            <div class="amount-buttons">
+                <button onclick="selectAmount(59)">59</button>
+                <button onclick="selectAmount(99)">99</button>
+                <button onclick="selectAmount(199)">199</button>
+            </div>
+            <p>59元/月，99/季，199元/年，请谨慎选择！</p>
+            <p>充值好后截图，发给客服！</p>
+            <div class="action-buttons">
+                <button onclick="proceedToRecharge()">立即充值</button>
+                <button onclick="contactSupport()">联系客服</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 收款码模态框 -->
+    <div id="qrCodeModal" class="qr-modal">
+        <div class="qr-modal-content">
+            <h3>请扫描下方二维码完成支付</h3>
+            <img id="qrCodeImage" src="" alt="收款二维码">
+            <button class="close-btn" onclick="closeQrCodeModal()">关闭</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 专业游戏平台。版权所有。</p>
+    </footer>
+
+    <script>
+        let selectedAmount = 0;
+
+        const rechargeData = [
+            { name: '张先生', phone: '13805210845', amount: 59 },
+            { name: '李先生', phone: '17805682512', amount: 59 },
+            { name: '王先生', phone: '18859823153', amount: 99 },
+            { name: '赵先生', phone: '13568926599', amount: 199 },
+            { name: '孙先生', phone: '19853258621', amount: 199 },
+            { name: '陈先生', phone: '19853256596', amount: 99 },
+            { name: '安先生', phone: '17256525256', amount: 199 },
+            { name: '吴先生', phone: '16585525652', amount: 59 },
+            { name: '周先生', phone: '15326549895', amount: 59 },
+            { name: '林先生', phone: '14255265652', amount: 99 },
+            { name: '刘先生', phone: '17856526522', amount: 199 },
+            { name: '杨先生', phone: '18526525356', amount: 59 },
+            { name: '黄先生', phone: '16523525652', amount: 99 },
+            { name: '周先生', phone: '17586253523', amount: 199 },
+            { name: '张先生', phone: '17541256565', amount: 59 },
+            { name: '王先生', phone: '19856525565', amount: 99 },
+            { name: '赵先生', phone: '15265952565', amount: 199 }
+        ];
+
+        const chargeNotifications = document.getElementById('chargeNotifications');
+
+        function addChargeNotification(data) {
+            const listItem = document.createElement('li');
+            const message = `${data.name}（${data.phone}）充值成功：${data.amount} 元`;
+            listItem.textContent = message;
+            chargeNotifications.appendChild(listItem);
+
+            if (chargeNotifications.children.length > 5) {
+                chargeNotifications.removeChild(chargeNotifications.firstChild);
+            }
+        }
+
+        function showNextChargeNotification() {
+            const randomIndex = Math.floor(Math.random() * rechargeData.length);
+            const data = rechargeData[randomIndex];
+            addChargeNotification(data);
+        }
+
+        setInterval(showNextChargeNotification, 5000);
+
+        function handleRecharge() {
+            document.getElementById('rechargeModal').style.display = 'block';
+        }
+
+        function selectAmount(amount) {
+            selectedAmount = amount;
+            alert(`您选择的充值金额是：${amount} 元`);
+        }
+
+        function proceedToRecharge() {
+            if (selectedAmount === 0) {
+                alert('请选择充值金额');
+                return;
+            }
+
+            document.getElementById('rechargeModal').style.display = 'none';
+            document.getElementById('qrCodeModal').style.display = 'block';
+
+            let qrCodeUrl = '';
+            switch (selectedAmount) {
+                case 59:
+                    qrCodeUrl = '微信图片_20241230130112.jpg';
+                    break;
+                case 99:
+                    qrCodeUrl = 'https://example.com/qrcode_99.jpg';
+                    break;
+                case 199:
+                    qrCodeUrl = 'https://example.com/qrcode_199.jpg';
+                    break;
+                default:
+                    alert('无效金额');
+                    return;
+            }
+
+            document.getElementById('qrCodeImage').src = qrCodeUrl;
+        }
+
+        function closeQrCodeModal() {
+            document.getElementById('qrCodeModal').style.display = 'none';
+        }
+
+        // 联系客服，跳转到客服页面或聊天工具
+        function contactSupport() {
+            // 这里是一个跳转示例，跳转到你自定义的客服页面或工具
+            window.location.href = "https://qm.qq.com/q/IekbXKmPAG"; // 你可以替换成实际的客服页面URL
+        }
+    </script>
+
+</body>
+
+</html>

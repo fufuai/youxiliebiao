@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模态弹窗</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        /* 弹窗样式 */
+        .modal {
+            display: none;
+            /* 初始隐藏弹窗 */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* 半透明背景 */
+            display: flex;
+            /* 使用 flexbox 居中 */
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            width: 300px;
+            /* 弹窗宽度 */
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            background-color: gray;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 模态弹窗 -->
+    <div class="modal" id="ageModal">
+        <div class="modal-content">
+            <p>您是否已满18周岁？</p>
+            <input type="checkbox" id="agreeTerms"> 我同意 <a href="yonghuxieyi.html">用户协议</a> 和 <a
+                href="yinsixieyi.html">隐私政策</a>
+            <br>
+            <button id="confirmButton" disabled>是</button>
+            <button id="exitButton">否</button>
+        </div>
+    </div>
+
+    <script>
+        // 检查用户是否已经做出选择
+        if (!localStorage.getItem('ageVerified')) {
+            // 显示模态弹窗
+            document.getElementById('ageModal').style.display = 'flex';
+        }
+
+        // 点击 "是" 按钮的处理
+        document.getElementById('confirmButton').addEventListener('click', function () {
+            // 检查是否勾选了同意协议
+            if (document.getElementById('agreeTerms').checked) {
+                // 用户同意，保存状态并跳转
+                localStorage.setItem('ageVerified', 'true');
+                // 在这里修改跳转URL
+                window.location.href = 'https://www.example.com';  // 跳转到目标页面
+            } else {
+                alert('您必须同意协议才能继续');
+            }
+        });
+
+        // 点击 "否" 按钮的处理
+        document.getElementById('exitButton').addEventListener('click', function () {
+            // 用户不同意，跳转到退出页面
+            window.location.href = 'https://www.example.com/exit.html';  // 跳转到退出页面
+            // 或者尝试关闭窗口
+            // window.close();
+        });
+
+        // 如果用户勾选了同意协议，启用"是"按钮
+        document.getElementById('agreeTerms').addEventListener('change', function () {
+            if (this.checked) {
+                document.getElementById('confirmButton').disabled = false;
+            } else {
+                document.getElementById('confirmButton').disabled = true;
+            }
+        });
+    </script>
+</body>
+
+</html>

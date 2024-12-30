@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LIANG NV BA</title>
+    <title>TX游戏站</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         /* 简单的CSS样式，调整标签的样式 */
@@ -230,6 +230,43 @@
             padding: 1px;
             /* 为页面添加内边距 */
         }
+
+        /* 模态弹窗样式 */
+        .modal {
+            display: none;
+            /* 默认隐藏 */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+            /* 半透明背景 */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .modal-content input[type="checkbox"] {
+            margin: 10px 0;
+        }
+
+        .modal-content button {
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -240,15 +277,16 @@
                 <li><a href="index.html">首页</a></li>
                 <li><a href="meituxiangqing/meituxiangqing.html">美图</a></li>
                 <li><a href="shipinxiangqing/shipinxiangqing.html">AV</a></li>
-                <li><a href="抽奖/抽奖.html">抽奖</a></li>
-                <li><a href="抽奖/抽奖.html">会员</a></li>
+                <li><a href="gongsiziliaowenjian/shangwuhezuo.html">赚钱</a></li>
+                <li><a href="gongsiziliaowenjian/huiyuanzhongxing.html">会员</a></li>
+                <li><a href="gongsiziliaowenjian/xiazaijiaocheng.html">教程</a></li>
             </ul>
         </nav>
     </header>
 
     <div class="announcement-container" id="announcement-container">
         <div class="announcement" id="announcement">
-            <p>公告1：欢迎访问TX游戏站！</p>
+            <p>公告1：欢迎访问:TX游戏站！</p>
             <p>公告2：专业提供游戏平台、游戏资源、游戏攻略、游戏直播！</p>
         </div>
     </div>
@@ -290,13 +328,25 @@
             <button id="next-song">下一首</button>
             <audio id="audio-player" controls style="display:none;"></audio> <!-- 隐藏默认控件 -->
         </div>
-        <p>@公司名称 | TX有限公司<br>电话：010-82971111<br>网址：www.txkuozhanban.com<br>客服热线：400-800-8888</p>
-        <p>地址：北京市海淀区西二旗路10号北京邮电大学西门</p>
+        <p>@公司名称 | TX游戏站<br>电话：010-82971111<br>网址：www.txkuozhanban.com<br>客服热线：400-800-8888</p>
+        <p>地址：新加坡市中心, 莱佛士大厦 10 楼, 56265号</p>
 
 
-        <a href="#">用户协议</a> | <a href="#">隐私政策</a>
+        <a href="gongsiziliaowenjian/yonghuxieyi.html">用户协议</a> | <a href="gongsiziliaowenjian/yinsixieyi.html">隐私政策</a>
 
     </footer>
+
+    <!-- 模态弹窗 -->
+    <div class="modal" id="ageModal">
+        <div class="modal-content">
+            <p>您是否已满18周岁？</p>
+            <input type="checkbox" id="agreeTerms"> 我同意 <a href="gongsiziliaowenjian/yonghuxieyi.html">用户协议</a> 和 <a
+                href="gongsiziliaowenjian/yinsixieyi.html">隐私政策</a>
+            <br>
+            <button id="confirmButton">是</button>
+            <button id="exitButton">否</button>
+        </div>
+    </div>
 
     <script>
         const imageFolderPath = '封面/';
@@ -717,6 +767,32 @@
 
         // 初始化加载第一首歌
         loadSong(currentSongIndex);
+
+        // 获取模态弹窗和按钮
+        const ageModal = document.getElementById('ageModal');
+        const confirmButton = document.getElementById('confirmButton');
+        const exitButton = document.getElementById('exitButton');
+        const agreeTerms = document.getElementById('agreeTerms');
+
+        // 显示模态弹窗
+        window.onload = function () {
+            ageModal.style.display = 'flex';
+        };
+
+        // 点击“是”按钮
+        confirmButton.addEventListener('click', () => {
+            if (agreeTerms.checked) {
+                ageModal.style.display = 'none'; // 隐藏模态弹窗
+            } else {
+                alert('请同意用户协议和隐私政策');
+            }
+        });
+
+        // 点击“否”按钮
+        exitButton.addEventListener('click', () => {
+            window.location.href = 'https://www.baidu.com'; // 重定向到其他网站
+        });
+
 
     </script>
 </body>
